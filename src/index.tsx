@@ -1,7 +1,7 @@
-import { h } from "./util/hyperbridge";
-import "./index.scss";
-import { WindowManager } from "./WindowManager";
-import { TopBar } from "./TopBar";
+import { h } from 'util/hyperbridge';
+import './index.scss';
+import { WindowManager } from 'os/WindowManager';
+import { TopBar } from 'os/TopBar';
 
 function App() {
   let container: HTMLDivElement = (

@@ -1,7 +1,7 @@
-import { h } from "../../util/hyperbridge";
-import { WindowControls } from "./WindowControls";
-import { WindowCanvas, WindowApp } from "./WindowCanvas";
-import "./index.scss";
+import { h } from 'util/hyperbridge';
+import { WindowControls } from './WindowControls';
+import { WindowCanvas, WindowApp } from './WindowCanvas';
+import './index.scss';
 
 export class WindowConstructor {
   element: HTMLDivElement;
@@ -10,8 +10,8 @@ export class WindowConstructor {
     startX: number,
     startY: number,
     manager: HTMLDivElement,
-    windowTitle = "window",
-    app: WindowApp
+    windowTitle = 'window',
+    app: WindowApp,
   ) {
     let closeHandler = () => {
       this.close(manager);
@@ -46,8 +46,8 @@ export class WindowConstructor {
 
       clickPosition = { x: pageX - offsetLeft, y: pageY - offsetTop };
 
-      window.addEventListener("mousemove", drag);
-      window.addEventListener("mouseup", drop);
+      window.addEventListener('mousemove', drag);
+      window.addEventListener('mouseup', drop);
       manager.appendChild(w);
     }
 
@@ -57,9 +57,9 @@ export class WindowConstructor {
     }
 
     function drop() {
-      window.removeEventListener("mousemove", drag);
-      window.removeEventListener("mouseup", drop);
+      window.removeEventListener('mousemove', drag);
+      window.removeEventListener('mouseup', drop);
     }
-    w.addEventListener("mousedown", grab);
+    w.addEventListener('mousedown', grab);
   }
 }

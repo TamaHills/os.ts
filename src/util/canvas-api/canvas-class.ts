@@ -1,4 +1,5 @@
 type fillStyle = string | CanvasGradient | CanvasPattern;
+
 export type CanvasFn = (canvas: CanvasObject) => boolean | void;
 
 interface GradientProperties {
@@ -18,10 +19,10 @@ interface RadialGradientProperties extends GradientProperties {
 export class CanvasObject {
   private ctx: CanvasRenderingContext2D;
   private backgroundStyle: fillStyle | null = null;
-  private fontStyle = ["10px", "sans-serif"];
+  private fontStyle = ['10px', 'sans-serif'];
 
   constructor(canvas: HTMLCanvasElement) {
-    this.ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+    this.ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
   }
 
   get width() {
@@ -43,7 +44,7 @@ export class CanvasObject {
     if (this.backgroundStyle) {
       return this.backgroundStyle;
     } else {
-      return "";
+      return '';
     }
   }
 
@@ -61,7 +62,7 @@ export class CanvasObject {
   }
 
   set fontSize(size: string | number) {
-    this.fontStyle[0] = typeof size === "number" ? `${size}px` : size;
+    this.fontStyle[0] = typeof size === 'number' ? `${size}px` : size;
   }
 
   private drawBackground() {
@@ -78,7 +79,7 @@ export class CanvasObject {
   }
 
   text(textString: string, x: number, y: number) {
-    this.ctx.font = this.fontStyle.join(" ");
+    this.ctx.font = this.fontStyle.join(' ');
     this.ctx.fillText(textString, x, y);
   }
 
@@ -96,7 +97,7 @@ export class CanvasObject {
       props.startX,
       props.startY,
       props.endX,
-      props.endY
+      props.endY,
     );
     if (props.colorOne) {
       gradient.addColorStop(0, props.colorOne);
@@ -113,7 +114,7 @@ export class CanvasObject {
       props.startR,
       props.endX,
       props.endY,
-      props.endR
+      props.endR,
     );
     if (props.colorOne) {
       gradient.addColorStop(0, props.colorOne);
@@ -126,7 +127,7 @@ export class CanvasObject {
   static initCanvas(
     setup: CanvasFn,
     draw: CanvasFn,
-    canvas: HTMLCanvasElement
+    canvas: HTMLCanvasElement,
   ) {
     let ctx: CanvasObject | null = null;
     function drawOnCanvas() {

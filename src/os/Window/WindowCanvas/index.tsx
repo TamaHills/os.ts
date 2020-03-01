@@ -1,5 +1,5 @@
-import { h } from "../../../util/hyperbridge";
-import { CanvasObject, CanvasFn } from "./canvas-api";
+import { h } from 'util/hyperbridge';
+import { CanvasObject, CanvasFn } from 'util/canvas-api';
 
 export type WindowApp = () => [CanvasFn, CanvasFn];
 

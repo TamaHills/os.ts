@@ -1,7 +1,7 @@
-import { h } from "../../../util/hyperbridge";
-import close from "./assets/close.png";
-import min from "./assets/min.png";
-import "./index.scss";
+import { h } from 'util/hyperbridge';
+import close from './assets/close.png';
+import min from './assets/min.png';
+import './index.scss';
 
 interface WindowControlProps {
   closeHandler: () => void;

@@ -1,26 +1,23 @@
-import {
-  CanvasObject,
-  CanvasFn
-} from "../../WindowManager/Window/WindowCanvas/";
+import { CanvasObject, CanvasFn } from '../../util/canvas-api';
 
 export function term(): [CanvasFn, CanvasFn] {
   let width = 600;
   let height = 400;
 
   let scrollText = [
-    "Welcome to SalukiOS 0.1a",
-    "",
-    "Type `hirematt` to get started.",
-    "Or type `help` for a full list of commands.",
-    "",
-    "shell ->"
+    'Welcome to SalukiOS 0.1a',
+    '',
+    'Type `hirematt` to get started.',
+    'Or type `help` for a full list of commands.',
+    '',
+    'shell ->',
   ];
 
   function windowSetup(ctx: CanvasObject) {
     ctx.size(width, height);
-    ctx.background = "#303030";
-    ctx.fill = "whitesmoke";
-    ctx.font = "VT323";
+    ctx.background = '#303030';
+    ctx.fill = 'whitesmoke';
+    ctx.font = 'VT323';
     ctx.fontSize = 16;
   }
 

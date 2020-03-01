@@ -14,8 +14,19 @@
     ],
     "rootDir": "src",
     "moduleResolution": "node",
+    "baseUrl": "src/",
+    "paths": {
+      "util/*": [
+        "util/*"
+      ],
+      "os/*": [
+        "os/*"
+      ],
+      "apps/*": [
+        "apps/*"
+      ]
+    },
     "types": [
-      "node_modules/@types",
       "./types"
     ]
   }
