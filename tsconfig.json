@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "module": "commonjs",
+    "jsx": "react",
+    "jsxFactory": "h",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "allowJs": true,
+    "target": "ES5",
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    "rootDir": "src",
+    "moduleResolution": "node",
+    "types": [
+      "node_modules/@types",
+      "./types"
+    ]
+  }
+}

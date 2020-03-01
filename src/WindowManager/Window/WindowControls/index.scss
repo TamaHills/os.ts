@@ -1,0 +1,26 @@
+
+
+.windowControls {
+  display: flex;
+  button {
+    box-sizing: content-box;
+    background: #dddddd;
+    border: 1px solid #222222;
+    line-height: 8px;
+    height: 19px;
+    width: 19px;
+    padding: 0;
+    margin: 0 2.5px;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    &:hover {
+      box-shadow: inset 0px 0px 4px 5px rgba(61, 60, 60, 0.2);
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+}
