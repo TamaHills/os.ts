@@ -5,7 +5,8 @@ import './index.scss';
 
 export class WindowConstructor {
   element: HTMLDivElement;
-
+  stdin: HTMLInputElement;
+  input = '';
   constructor(
     startX: number,
     startY: number,
@@ -16,14 +17,15 @@ export class WindowConstructor {
     let closeHandler = () => {
       this.close(manager);
     };
-
+    this.stdin = <StdIn />;
     this.element = (
       <div className="windowContainer">
+        {this.stdin}
         <div className="header">
           {windowTitle}
           <WindowControls closeHandler={closeHandler} />
         </div>
-        <WindowCanvas app={app} />
+        <WindowCanvas win={this} app={app} />
       </div>
     );
 
@@ -38,6 +40,8 @@ export class WindowConstructor {
 
   private listeners(manager: HTMLDivElement) {
     let w = this.element;
+    let stdin = this.stdin;
+    let win = this;
     let clickPosition = { x: 0, y: 0 };
 
     function grab(e: MouseEvent) {
@@ -49,6 +53,7 @@ export class WindowConstructor {
       window.addEventListener('mousemove', drag);
       window.addEventListener('mouseup', drop);
       manager.appendChild(w);
+      stdin.style.zIndex = '-1';
     }
 
     function drag(e: MouseEvent) {
@@ -59,7 +64,34 @@ export class WindowConstructor {
     function drop() {
       window.removeEventListener('mousemove', drag);
       window.removeEventListener('mouseup', drop);
+      stdin.focus();
     }
+
+    function input() {
+      win.input = stdin.value;
+    }
+
+    function inputReturn(e: KeyboardEvent) {
+      if (e.key === 'Enter') {
+        win.input = '';
+        stdin.value = '';
+      }
+    }
+
+    stdin.addEventListener('input', input);
+    stdin.addEventListener('keypress', inputReturn);
+
     w.addEventListener('mousedown', grab);
   }
+}
+
+let StdInStyles = {
+  opacity: '0',
+  position: 'absolute',
+  bottom: '10',
+  left: '10',
+};
+
+function StdIn() {
+  return <input style={StdInStyles} type="text" value="" />;
 }

@@ -10,6 +10,10 @@ interface WindowControlProps {
 export function WindowControls({ closeHandler }: WindowControlProps) {
   return (
     <div
+      /* 
+      Stop progation on mousedown this prevents listeners on the window from 
+      blocking window control events 
+      */
       onmousedown={(e: MouseEvent) => e.stopPropagation()}
       className="windowControls"
     >

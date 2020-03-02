@@ -10,6 +10,7 @@ class WindowManagerObject {
     this.element = <div id="windowManager" />;
 
     this.newWindow('terminal', term);
+    this.newWindow('terminal', term);
   }
 
   newWindow(title: string, app: WindowApp) {

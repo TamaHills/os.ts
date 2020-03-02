@@ -1,6 +1,7 @@
 import { CanvasObject, CanvasFn } from '../../util/canvas-api';
+import { WindowConstructor } from 'os/Window';
 
-export function term(): [CanvasFn, CanvasFn] {
+export function term(win: WindowConstructor): [CanvasFn, CanvasFn] {
   let width = 600;
   let height = 400;
 
@@ -10,7 +11,6 @@ export function term(): [CanvasFn, CanvasFn] {
     'Type `hirematt` to get started.',
     'Or type `help` for a full list of commands.',
     '',
-    'shell ->',
   ];
 
   function windowSetup(ctx: CanvasObject) {
@@ -26,13 +26,19 @@ export function term(): [CanvasFn, CanvasFn] {
 
   function windowDraw(ctx: CanvasObject) {
     count += 1;
-    if (count % 10 === 0) {
+    if (count % 5 === 0) {
       if (printIndex < scrollText.length) {
         ctx.clear();
         for (let i = 0; i <= printIndex; i++) {
           ctx.text(scrollText[i], 5, (i + 1) * 18);
         }
         printIndex += 1;
+      } else {
+        ctx.fill = '#303030';
+        ctx.rect(0, printIndex * 18, 400, 21);
+        ctx.fill = 'whitesmoke';
+
+        ctx.text(`shell -> ${win.input}|`, 5, (printIndex + 1) * 18);
       }
     }
   }

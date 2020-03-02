@@ -4,7 +4,7 @@ import { WindowManager } from 'os/WindowManager';
 import { TopBar } from 'os/TopBar';
 
 function App() {
-  let container: HTMLDivElement = (
+  let container = (
     <div className="desktopContainer">
       {WindowManager.element}
       <TopBar />
