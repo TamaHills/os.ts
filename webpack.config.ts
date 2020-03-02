@@ -7,6 +7,7 @@ let buildPath = path.join(__dirname, 'build');
 
 module.exports = {
   // Currently we need to add '.ts' to the resolve.extensions array.
+  entry: __dirname + '/src/index.tsx',
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.scss', '.png'],
     plugins: [new TsConfigPathsPlugin({ forceIsolatedModules: true })],
@@ -39,10 +40,10 @@ module.exports = {
       },
     ],
   },
-  plugins: [new HtmlWebpackPlugin()],
+  
   output: {
     path: buildPath,
     filename: 'app.bundle.js',
-    publicPath: buildPath,
   },
+  plugins: [new HtmlWebpackPlugin()],
 };
