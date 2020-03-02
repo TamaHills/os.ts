@@ -1,4 +1,5 @@
 import { h } from 'util/hyperbridge';
+
 import { WindowControls } from './WindowControls';
 import { WindowCanvas, WindowApp } from './WindowCanvas';
 import './index.scss';

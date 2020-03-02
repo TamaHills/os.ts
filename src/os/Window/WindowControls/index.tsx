@@ -1,6 +1,8 @@
 import { h } from 'util/hyperbridge';
-//import close from './assets/close.png';
-//import min from './assets/min.png';
+// @ts-ignore
+import close from './assets/close.png';
+// @ts-ignore
+import min from './assets/min.png';
 import './index.scss';
 
 interface WindowControlProps {
@@ -18,8 +20,10 @@ export function WindowControls({ closeHandler }: WindowControlProps) {
       className="windowControls"
     >
       <button className="min">
+      <img src={min} alt=""/>
       </button>
       <button onclick={closeHandler} className="close">
+      <img src={close} alt=""/>
       </button>
     </div>
   );
