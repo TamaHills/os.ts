@@ -12,22 +12,21 @@
       "es6",
       "dom"
     ],
-    "outDir": "./build",
-    "rootDir": "src",
     "moduleResolution": "node",
-    "baseUrl": "src/",
+    "baseUrl": ".",
     "paths": {
       "util/*": [
-        "util/*"
+        "src/util/*"
       ],
       "os/*": [
-        "os/*"
+        "src/os/*"
       ],
       "apps/*": [
-        "apps/*"
+        "src/apps/*"
       ]
     },
     "types": [
+      "./node_modules/@types/node",
       "./types"
     ]
   }

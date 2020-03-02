@@ -6,11 +6,11 @@ type styleProps = { [e in keyof CSSStyleDeclaration]?: CSSStyleDeclaration[e] };
 type intrinsicProps<T extends keyof HTMLElementTagNameMap> = {
   [attr in keyof HTMLElementTagNameMap[T]]?: attr extends 'style'
     ? styleProps
-    : HTMLElementTagNameMap[T][attr]
+    : HTMLElementTagNameMap[T][attr];
 };
 
 declare namespace JSX {
   type IntrinsicElements = {
-    [e in keyof HTMLElementTagNameMap]: intrinsicProps<e>
+    [e in keyof HTMLElementTagNameMap]: intrinsicProps<e>;
   };
 }

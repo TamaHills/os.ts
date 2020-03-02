@@ -3,7 +3,7 @@ import { WindowControls } from './WindowControls';
 import { WindowCanvas, WindowApp } from './WindowCanvas';
 import './index.scss';
 
-export class WindowConstructor {
+export class WindowConstructor implements WindowConstructor {
   element: HTMLDivElement;
   stdin: HTMLInputElement;
   input = '';

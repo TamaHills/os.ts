@@ -1,6 +1,6 @@
 import { h } from 'util/hyperbridge';
-import close from './assets/close.png';
-import min from './assets/min.png';
+//import close from './assets/close.png';
+//import min from './assets/min.png';
 import './index.scss';
 
 interface WindowControlProps {
@@ -17,11 +17,9 @@ export function WindowControls({ closeHandler }: WindowControlProps) {
       onmousedown={(e: MouseEvent) => e.stopPropagation()}
       className="windowControls"
     >
-      <button className="min" data-symbol={min}>
-        <img src={min} alt="minimize window" />
+      <button className="min">
       </button>
-      <button onclick={closeHandler} className="close" data-symbol={close}>
-        <img src={close} alt="close window" />
+      <button onclick={closeHandler} className="close">
       </button>
     </div>
   );
