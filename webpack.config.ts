@@ -1,9 +1,9 @@
 const { TsConfigPathsPlugin } = require('awesome-typescript-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin;
 
-const path = require('path');
-
-let buildPath = path.join(__dirname, 'build');
+let buildPath = __dirname + '/build';
 
 module.exports = {
   // Currently we need to add '.ts' to the resolve.extensions array.
@@ -12,7 +12,9 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.scss', '.png'],
     plugins: [new TsConfigPathsPlugin({ forceIsolatedModules: true })],
   },
-
+  stats: {
+    chunks: false,
+  },
   // Source maps support ('inline-source-map' also works)
   devtool: 'source-map',
 
@@ -26,7 +28,6 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          // Creates `style` nodes from JS strings
           'style-loader',
           // Translates CSS into CommonJS
           'css-loader',
@@ -40,10 +41,17 @@ module.exports = {
       },
     ],
   },
-  
+
   output: {
     path: buildPath,
-    filename: 'app.bundle.js',
+    filename: 'bundle.js',
   },
-  plugins: [new HtmlWebpackPlugin()],
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'SalukiOS',
+    }) /* new BundleAnalyzerPlugin() */,
+  ],
+  devServer: {
+    stats:'minimal',
+  }
 };

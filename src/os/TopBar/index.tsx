@@ -2,7 +2,11 @@ import { h } from 'util/hyperbridge';
 import './index.scss';
 
 export function TopBar() {
-  function OpenMenu(e: MouseEvent) {}
+  function OpenMenu(e: MouseEvent) {
+
+
+
+  }
 
   return (
     <div className="topbarContainer">
@@ -13,4 +17,13 @@ export function TopBar() {
       </div>
     </div>
   );
+}
+
+function TopBarMenu() {
+
+  return (
+    <div>
+      <p>open terminal</p>
+    </div>
+  )
 }

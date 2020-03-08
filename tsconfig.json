@@ -5,6 +5,8 @@
     "jsx": "react",
     "jsxFactory": "h",
     "esModuleInterop": true,
+    "outDir": "./build",
+    "sourceRoot": "./src",
     "sourceMap": true,
     "allowJs": true,
     "target": "ES5",
@@ -25,9 +27,6 @@
         "src/apps/*"
       ]
     },
-    "types": [
-      "./node_modules/@types/node",
-      "./types"
-    ]
+    "typeRoots": ["node_modules/@types", "types"],
   }
 }

@@ -1,6 +1,6 @@
 type fillStyle = string | CanvasGradient | CanvasPattern;
 
-export type CanvasFn = (canvas: CanvasObject) => boolean | void;
+export type CanvasFn = () => void;
 
 interface GradientProperties {
   startX: number;
@@ -20,6 +20,8 @@ export class CanvasObject {
   private ctx: CanvasRenderingContext2D;
   private backgroundStyle: fillStyle | null = null;
   private fontStyle = ['10px', 'sans-serif'];
+  private isSetup = false
+
 
   constructor(canvas: HTMLCanvasElement) {
     this.ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
@@ -124,19 +126,21 @@ export class CanvasObject {
     }
     return gradient;
   }
-  static initCanvas(
+
+  initCanvas(
     setup: CanvasFn,
     draw: CanvasFn,
-    canvas: HTMLCanvasElement,
   ) {
-    let ctx: CanvasObject | null = null;
+    let ctx = this
+
     function drawOnCanvas() {
-      if (ctx) {
-        draw(ctx);
+      if (ctx.isSetup) {
+        draw()
       } else {
-        ctx = new CanvasObject(canvas);
-        setup(ctx);
+        setup()
+        ctx.isSetup = true
       }
+      
       window.requestAnimationFrame(drawOnCanvas);
     }
     window.requestAnimationFrame(drawOnCanvas);

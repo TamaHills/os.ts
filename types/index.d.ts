@@ -1,16 +1,17 @@
 // Maps JSX element tagnames -> HTMLElement interface
 // This allows automatic prop typing for JSX Tags
+// For custom JSX factories
 
-type styleProps = { [e in keyof CSSStyleDeclaration]?: CSSStyleDeclaration[e] };
+// Map nested interfaces
+type MapPropInterface<map extends {}> = { [prop in keyof map]?: map[prop] };
 
-type intrinsicProps<T extends keyof HTMLElementTagNameMap> = {
-  [attr in keyof HTMLElementTagNameMap[T]]?: attr extends 'style'
-    ? styleProps
-    : HTMLElementTagNameMap[T][attr];
+// Map all interface props
+type MapIntrinsicProps<e extends Element> = {
+  [attr in keyof e]?: e[attr] extends {} ? MapPropInterface<e[attr]> : e[attr];
 };
 
 declare namespace JSX {
   type IntrinsicElements = {
-    [e in keyof HTMLElementTagNameMap]: intrinsicProps<e>;
+    [e in keyof HTMLElementTagNameMap]: MapIntrinsicProps<HTMLElementTagNameMap[e]>;
   };
 }

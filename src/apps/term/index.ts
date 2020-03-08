@@ -1,7 +1,7 @@
 import { CanvasObject, CanvasFn } from '../../util/canvas-api';
 import { WindowConstructor } from 'os/Window';
 
-export function term(win: WindowConstructor): [CanvasFn, CanvasFn] {
+export function term(win: WindowConstructor,ctx: CanvasObject): [CanvasFn, CanvasFn] {
   let width = 600;
   let height = 400;
 
@@ -13,7 +13,7 @@ export function term(win: WindowConstructor): [CanvasFn, CanvasFn] {
     '',
   ];
 
-  function windowSetup(ctx: CanvasObject) {
+  function windowSetup() {
     ctx.size(width, height);
     ctx.background = '#303030';
     ctx.fill = 'whitesmoke';
@@ -24,7 +24,7 @@ export function term(win: WindowConstructor): [CanvasFn, CanvasFn] {
   let count = 0;
   let printIndex = 0;
 
-  function windowDraw(ctx: CanvasObject) {
+  function windowDraw() {
     count += 1;
     if (count % 5 === 0) {
       if (printIndex < scrollText.length) {
@@ -34,13 +34,27 @@ export function term(win: WindowConstructor): [CanvasFn, CanvasFn] {
         }
         printIndex += 1;
       } else {
-        ctx.fill = '#303030';
-        ctx.rect(0, printIndex * 18, 400, 21);
+        clearLine(printIndex)
         ctx.fill = 'whitesmoke';
+        let first = win.input
+        let second = ''
+        
+        let {selectionStart} = win.stdin
 
-        ctx.text(`shell -> ${win.input}|`, 5, (printIndex + 1) * 18);
+        if (selectionStart) {
+          first = win.input.substr(0, selectionStart)
+          second = win.input.substr(selectionStart)
+        }
+        ctx.text(`shell -> ${first}${win.stdin.isSameNode(document.activeElement) ? '|': ""}${second}`, 5, (printIndex + 1) * 18);
       }
     }
+  }
+
+  function clearLine(height: number) {
+    let oldFill = ctx.fill
+    ctx.fill = '#303030';
+    ctx.rect(0, height * 18, 600, 21);
+    ctx.fill = oldFill
   }
 
   return [windowSetup, windowDraw];
