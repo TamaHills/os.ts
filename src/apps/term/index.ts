@@ -1,10 +1,12 @@
 import { CanvasObject, CanvasFn } from '../../util/canvas-api';
 import { WindowConstructor } from 'os/Window';
 
-export function term(win: WindowConstructor,ctx: CanvasObject): [CanvasFn, CanvasFn] {
+export function term(
+  win: WindowConstructor,
+  ctx: CanvasObject,
+): [CanvasFn, CanvasFn] {
   let width = 600;
   let height = 400;
-
   let scrollText = [
     'Welcome to SalukiOS 0.1a',
     '',
@@ -12,6 +14,22 @@ export function term(win: WindowConstructor,ctx: CanvasObject): [CanvasFn, Canva
     'Or type `help` for a full list of commands.',
     '',
   ];
+  function inputReturn(e: KeyboardEvent) {
+    if (e.key === 'Enter') {
+      if (scrollText.length > 20) {
+        scrollText.shift();
+        ctx.clear();
+        scrollText.forEach((text, i) => {
+          ctx.text(text, 5, (i + 1) * 18);
+        })
+      }
+      scrollText.push(win.stdin.value);
+      win.input = '';
+      win.stdin.value = '';
+    }
+  }
+
+  win.stdin.addEventListener('keypress', inputReturn);
 
   function windowSetup() {
     ctx.size(width, height);
@@ -34,27 +52,33 @@ export function term(win: WindowConstructor,ctx: CanvasObject): [CanvasFn, Canva
         }
         printIndex += 1;
       } else {
-        clearLine(printIndex)
+        clearLine(printIndex);
         ctx.fill = 'whitesmoke';
-        let first = win.input
-        let second = ''
-        
-        let {selectionStart} = win.stdin
+        let first = win.input;
+        let second = '';
+
+        let { selectionStart } = win.stdin;
 
         if (selectionStart) {
-          first = win.input.substr(0, selectionStart)
-          second = win.input.substr(selectionStart)
+          first = win.input.substr(0, selectionStart);
+          second = win.input.substr(selectionStart);
         }
-        ctx.text(`shell -> ${first}${win.stdin.isSameNode(document.activeElement) ? '|': ""}${second}`, 5, (printIndex + 1) * 18);
+        ctx.text(
+          `shell -> ${first}${
+            win.stdin.isSameNode(document.activeElement) ? '|' : ''
+          }${second}`,
+          5,
+          (printIndex + 1) * 18,
+        );
       }
     }
   }
 
   function clearLine(height: number) {
-    let oldFill = ctx.fill
+    let oldFill = ctx.fill;
     ctx.fill = '#303030';
     ctx.rect(0, height * 18, 600, 21);
-    ctx.fill = oldFill
+    ctx.fill = oldFill;
   }
 
   return [windowSetup, windowDraw];

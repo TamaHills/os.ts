@@ -1,11 +1,15 @@
 import { h } from 'util/hyperbridge';
+// @ts-ignore
+import term from 'assets/term.png'
 import './index.scss';
 
+
 export function TopBar() {
-  function OpenMenu(e: MouseEvent) {
-
-
-
+  let menu: HTMLDivElement = <TopBarMenu />
+  
+  function OpenMenu() {
+    let menuDisplay = menu.style.display === 'flex' ? 'none': 'flex';
+    menu.style.display = menuDisplay
   }
 
   return (
@@ -15,15 +19,15 @@ export function TopBar() {
           menu
         </div>
       </div>
+      {menu}
     </div>
   );
 }
 
 function TopBarMenu() {
-
   return (
-    <div>
-      <p>open terminal</p>
+    <div id="menu">
+      <p><img src={term} />open terminal</p>
     </div>
-  )
+  );
 }

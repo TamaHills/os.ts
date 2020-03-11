@@ -1,9 +1,12 @@
 const { TsConfigPathsPlugin } = require('awesome-typescript-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-  .BundleAnalyzerPlugin;
+const CompressionPlugin = require('compression-webpack-plugin');
 
 let buildPath = __dirname + '/build';
+
+htmlFile = {
+  title: 'SalukiOS',
+};
 
 module.exports = {
   // Currently we need to add '.ts' to the resolve.extensions array.
@@ -37,7 +40,7 @@ module.exports = {
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
-        loader: 'file-loader?name=/public/assets/[name].[ext]',
+        loader: 'file-loader?name=./public/assets/[name].[ext]',
       },
     ],
   },
@@ -47,11 +50,15 @@ module.exports = {
     filename: 'bundle.js',
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      title: 'SalukiOS',
-    }) /* new BundleAnalyzerPlugin() */,
+    new HtmlWebpackPlugin(),
+    new CompressionPlugin({
+      test: /\.js(\?.*)?$/i,
+    })
   ],
   devServer: {
-    stats:'minimal',
-  }
+    stats: 'minimal',
+    open: true,
+    port: 5000,
+    gzip: true
+  },
 };

@@ -72,15 +72,8 @@ export class WindowConstructor implements WindowConstructor {
       win.input = stdin.value;
     }
 
-    function inputReturn(e: KeyboardEvent) {
-      if (e.key === 'Enter') {
-        win.input = '';
-        stdin.value = '';
-      }
-    }
-
+    
     stdin.addEventListener('input', input);
-    stdin.addEventListener('keypress', inputReturn);
 
     w.addEventListener('mousedown', grab);
   }
