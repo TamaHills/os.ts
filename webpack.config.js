@@ -1,12 +1,13 @@
 const { TsConfigPathsPlugin } = require('awesome-typescript-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CompressionPlugin = require('compression-webpack-plugin');
 
 let buildPath = __dirname + '/build';
 
-htmlFile = {
-  title: 'SalukiOS',
-};
+srcMaps = process.env.WEBPACK_DEV_SERVER === 'true' ? 'inline-source-map' : 'source-map'
+
+let htmlConfig = {
+  title: 'SalukiOS'
+}
 
 module.exports = {
   // Currently we need to add '.ts' to the resolve.extensions array.
@@ -50,15 +51,14 @@ module.exports = {
     filename: 'bundle.js',
   },
   plugins: [
-    new HtmlWebpackPlugin(),
-    new CompressionPlugin({
-      test: /\.js(\?.*)?$/i,
-    })
+    new HtmlWebpackPlugin({
+      htmlConfig
+    }) /* new BundleAnalyzerPlugin() */,
   ],
   devServer: {
-    stats: 'minimal',
+    stats:'minimal',
+    compress: true,
     open: true,
     port: 5000,
-    gzip: true
-  },
+  }
 };
