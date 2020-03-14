@@ -1,10 +1,11 @@
 import { h } from 'util/hyperbridge';
 
 import { WindowControls } from './WindowControls';
-import { WindowCanvas, WindowApp } from './WindowCanvas';
+import { WindowCanvas } from './WindowCanvas';
+import { WindowApp } from './WindowCanvas/window-app'
 import './index.scss';
 
-export class WindowConstructor implements WindowConstructor {
+export class WindowContext {
   element: HTMLDivElement;
   stdin: HTMLInputElement;
   input = '';
@@ -13,7 +14,7 @@ export class WindowConstructor implements WindowConstructor {
     startY: number,
     manager: HTMLDivElement,
     windowTitle = 'window',
-    app: WindowApp,
+    app: typeof WindowApp,
   ) {
     let closeHandler = () => {
       this.close(manager);

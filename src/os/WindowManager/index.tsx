@@ -1,7 +1,7 @@
 import { h } from 'util/hyperbridge';
-import { WindowConstructor } from 'os/Window';
-import { WindowApp } from 'os/Window/WindowCanvas';
-import { term } from 'apps/term';
+import { WindowContext } from 'os/Window';
+import { WindowApp } from 'os/Window/WindowCanvas/window-app';
+import { Term } from 'apps/term';
 
 class WindowManagerObject {
   element: HTMLDivElement;
@@ -9,12 +9,12 @@ class WindowManagerObject {
   constructor() {
     this.element = <div id="windowManager" />;
 
-    this.newWindow('terminal', term);
-    this.newWindow('terminal', term);
+    this.newWindow('terminal', Term);
+    this.newWindow('terminal', Term);
   }
 
-  newWindow(title: string, app: WindowApp) {
-    let w = new WindowConstructor(10, 50, this.element, title, app);
+  newWindow(title: string, app: typeof WindowApp) {
+    let w = new WindowContext(10, 50, this.element, title, app);
     this.element.appendChild(w.element);
   }
 

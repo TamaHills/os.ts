@@ -3,8 +3,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 let buildPath = __dirname + '/build';
 
-srcMaps = process.env.WEBPACK_DEV_SERVER === 'true' ? 'inline-source-map' : 'source-map'
-
 let htmlConfig = {
   title: 'SalukiOS'
 }
