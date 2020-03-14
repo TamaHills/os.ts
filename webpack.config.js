@@ -49,9 +49,7 @@ module.exports = {
     filename: 'bundle.js',
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      htmlConfig
-    }) /* new BundleAnalyzerPlugin() */,
+    new HtmlWebpackPlugin(htmlConfig) /* new BundleAnalyzerPlugin() */,
   ],
   devServer: {
     stats:'minimal',

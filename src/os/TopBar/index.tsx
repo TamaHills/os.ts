@@ -1,4 +1,6 @@
 import { h } from 'util/hyperbridge';
+import { WindowManager } from 'os/WindowManager'
+import { Term } from 'apps/term'
 // @ts-ignore
 import term from 'assets/term.png'
 import './index.scss';
@@ -27,7 +29,7 @@ export function TopBar() {
 function TopBarMenu() {
   return (
     <div id="menu">
-      <p><img src={term} />open terminal</p>
+      <p onclick={() => {WindowManager.newWindow('terminal', Term)}}><img src={term} />open terminal</p>
     </div>
   );
 }

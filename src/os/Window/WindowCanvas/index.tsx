@@ -1,5 +1,5 @@
 import { h } from 'util/hyperbridge';
-import { CanvasObject, CanvasFn } from 'util/canvas-api';
+import { CanvasObject } from 'util/canvas-api';
 import { WindowContext } from 'os/Window';
 import { WindowApp } from './window-app'
 

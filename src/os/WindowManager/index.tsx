@@ -8,9 +8,6 @@ class WindowManagerObject {
 
   constructor() {
     this.element = <div id="windowManager" />;
-
-    this.newWindow('terminal', Term);
-    this.newWindow('terminal', Term);
   }
 
   newWindow(title: string, app: typeof WindowApp) {

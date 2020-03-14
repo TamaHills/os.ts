@@ -1,24 +1,28 @@
 import { WindowApp } from 'os/Window/WindowCanvas/window-app'
-import { WindowContext } from 'os/Window';
-import { CanvasObject } from 'util/canvas-api';
-
 
 
 export class Term extends WindowApp {
   w = 600
   h = 400
-  constructor(win: WindowContext, ctx: CanvasObject) {
-    super(win, ctx);
-  }
+  scrollText = ["Welcome to SalukiOS 0.1a", "Type 'help' for a list of commands"]
+  shellText = "shell ~>"
   setup() {
     this.ctx.size(this.w, this.h);
     this.ctx.background = '#303030';
     this.ctx.fill = 'whitesmoke';
     this.ctx.font = 'VT323';
     this.ctx.fontSize = 16;
+    this.printScroll()
   }
-  draw() {
 
+  draw() {
+  }
+
+  printScroll() {
+    this.ctx.clear();
+    this.scrollText.forEach((t, i) => {
+      this.ctx.text(t, 5, (i + 1) * 20);
+    })
   }
 }
 
